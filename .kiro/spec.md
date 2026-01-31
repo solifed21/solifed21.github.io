@@ -1,6 +1,6 @@
-# So Life Dev Log — Plan
+# So Life Dev Log — Spec (.kiro)
 
-## 1) PRD 요약
+## PRD 요약
 - 목표: 개발 기록/프로젝트 로그용 개인 블로그
 - 플랫폼: GitHub Pages
 - 스택: Astro (SSG)
@@ -9,7 +9,7 @@
 - 슬로건: 재밋는걸 만드는게 목적
 - 로고: 이니셜 S
 
-## 2) 정보구조(IA)
+## 정보구조(IA)
 - `/` 홈 (최신 글 카드)
 - `/posts/` 전체 글
 - `/posts/[slug]/` 글 상세
@@ -20,7 +20,7 @@
 - `/about/` 소개
 - `/rss.xml` RSS
 
-## 3) 핵심 기능
+## 핵심 기능
 ### MVP
 - 카드형 목록 + 태그 뱃지
 - 글 상세 (Markdown, Notion 느낌)
@@ -38,14 +38,14 @@
 - 이전/다음 글 네비
 - 404 커스텀
 
-## 4) 기술 스택
+## 기술 스택
 - Astro + Markdown(Content Collections)
 - 스타일: Tailwind 또는 vanilla CSS
 - 검색: Pagefind (빌드타임)
 - 댓글: Giscus
 - 배포: GitHub Pages + Actions
 
-## 5) 구현 단계
+## 구현 단계
 1) Astro 프로젝트 초기화
 2) 레이아웃/테마 구축
 3) 글 목록/상세/카테고리/태그
