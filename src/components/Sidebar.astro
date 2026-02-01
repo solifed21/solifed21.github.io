@@ -35,45 +35,47 @@ const tags = [...tagMap.entries()].sort((a, b) => b[1] - a[1]);
 
 <style>
 	.sidebar {
-		min-width: 200px;
+		width: 220px;
+		flex-shrink: 0;
+		position: sticky;
+		top: 80px;
+		height: fit-content;
+		padding: 1.25em;
+		background: var(--bg-card);
+		border-radius: 12px;
+		border: 1px solid var(--border-color);
 	}
 	.sidebar h3 {
-		font-size: 1em;
+		font-size: 0.85em;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
 		margin-bottom: 0.75em;
 		color: var(--accent);
 	}
-	.sidebar section {
-		margin-bottom: 1.5em;
-	}
-	.sidebar ul {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-	}
-	.sidebar li {
-		margin-bottom: 0.5em;
-	}
-	.sidebar a {
+	.sidebar section { margin-bottom: 1.5em; }
+	.sidebar section:last-child { margin-bottom: 0; }
+	.sidebar ul { list-style: none; padding: 0; margin: 0; }
+	.sidebar li { margin-bottom: 0.4em; }
+	.sidebar li a {
 		color: var(--text-secondary);
 		font-size: 0.9em;
+		transition: color 0.15s;
 	}
-	.sidebar a:hover {
-		color: var(--accent);
-	}
-	.tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5em;
-	}
+	.sidebar li a:hover { color: var(--accent); }
+	.tags { display: flex; flex-wrap: wrap; gap: 0.4em; }
 	.tag {
 		background: var(--bg-secondary);
-		padding: 0.25em 0.6em;
+		padding: 0.2em 0.5em;
 		border-radius: 4px;
-		font-size: 0.85em;
+		font-size: 0.8em;
 		color: var(--text-secondary);
+		transition: all 0.15s;
 	}
-	.tag:hover {
-		background: var(--accent);
-		color: var(--bg-primary);
+	.tag:hover { background: var(--accent); color: var(--bg-primary); }
+	@media (max-width: 720px) {
+		.sidebar {
+			width: 100%;
+			position: static;
+		}
 	}
 </style>

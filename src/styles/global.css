@@ -26,12 +26,27 @@ body {
 	flex-direction: column;
 }
 
-main {
+/* 레이아웃 컨테이너 */
+.layout {
+	display: flex;
+	gap: 2.5em;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 2em 1.5em;
+}
+
+.layout > main {
 	flex: 1;
-	width: 960px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 2em 1em;
+	min-width: 0;
+}
+
+/* 사이드바 없는 페이지용 */
+body > main {
+	flex: 1;
+	width: 100%;
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 2em 1.5em;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -95,7 +110,8 @@ img {
 
 @media (max-width: 720px) {
 	body { font-size: 16px; }
-	main { padding: 1em; }
+	.layout { flex-direction: column; gap: 1.5em; padding: 1em; }
+	body > main { padding: 1em; }
 }
 
 .sr-only {

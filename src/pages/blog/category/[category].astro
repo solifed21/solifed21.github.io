@@ -54,7 +54,7 @@ const posts = (await getCollection('blog'))
 	.count { color: var(--text-secondary); margin-bottom: 1.5em; }
 	.post-grid {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 		gap: 1.5em;
 		list-style: none;
 		padding: 0;
@@ -72,15 +72,8 @@ const posts = (await getCollection('blog'))
 		box-shadow: var(--box-shadow);
 	}
 	.post-card a { display: block; color: inherit; }
-	.post-card img {
-		width: 100%;
-		aspect-ratio: 2/1;
-		object-fit: cover;
-	}
+	.post-card img { width: 100%; aspect-ratio: 2/1; object-fit: cover; }
 	.post-card .content { padding: 1em; }
 	.post-card h2 { font-size: 1.1em; margin-bottom: 0.5em; }
 	.post-card .date { color: var(--text-secondary); font-size: 0.85em; margin: 0; }
-	@media (max-width: 720px) {
-		.post-grid { grid-template-columns: 1fr; }
-	}
 </style>

@@ -53,14 +53,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.prop
 </html>
 
 <style>
-	.layout {
-		display: flex;
-		gap: 2em;
-		max-width: 1100px;
-		margin: 0 auto;
-		padding: 2em 1em;
-	}
-	main { flex: 1; max-width: 100%; }
+	main { min-width: 0; }
 	.hero-image { width: 100%; }
 	.hero-image img {
 		display: block;
@@ -69,19 +62,17 @@ const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.prop
 		box-shadow: var(--box-shadow);
 	}
 	.prose {
-		max-width: 100%;
-		margin: auto;
-		padding: 1em 0;
-		color: rgb(var(--gray-dark));
+		max-width: 720px;
+		margin: 0 auto;
+		padding: 1.5em 0;
 	}
 	.title {
-		margin-bottom: 1em;
-		padding: 1em 0;
+		margin-bottom: 1.5em;
+		padding-bottom: 1em;
 		text-align: center;
-		line-height: 1;
 	}
 	.title h1 { margin: 0 0 0.5em 0; }
-	.date { margin-bottom: 0.5em; color: var(--text-secondary); }
+	.date { margin-bottom: 0.5em; color: var(--text-secondary); font-size: 0.95em; }
 	.last-updated-on { font-style: italic; }
 	.tags { display: flex; justify-content: center; gap: 0.5em; margin-top: 0.75em; }
 	.tag {
@@ -90,9 +81,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags } = Astro.prop
 		border-radius: 4px;
 		font-size: 0.85em;
 		color: var(--text-secondary);
+		transition: all 0.15s;
 	}
 	.tag:hover { background: var(--accent); color: var(--bg-primary); }
-	@media (max-width: 720px) {
-		.layout { flex-direction: column; }
-	}
 </style>
