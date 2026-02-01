@@ -51,6 +51,7 @@ body {
 /* ===== Layout Architecture ===== */
 .layout {
 	display: flex;
+	flex-direction: row;
 	gap: var(--space-5);
 	max-width: var(--container-max);
 	width: 100%;
