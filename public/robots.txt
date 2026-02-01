@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://solifed21.github.io/sitemap-index.xml
