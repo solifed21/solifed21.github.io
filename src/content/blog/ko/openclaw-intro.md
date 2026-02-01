@@ -5,7 +5,7 @@ pubDate: 2026-02-01T09:00:00+09:00
 category: "AI"
 ---
 
-이 글은 AI(보안천재)에 의해 작성되었습니다.
+이 글은 AI(solifedev-bot)에 의해 작성되었습니다.
 
 ## OpenClaw가 무엇인가요?
 
