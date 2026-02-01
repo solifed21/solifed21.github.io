@@ -1,51 +1,56 @@
-# Design System Steering
+# Professional Design & Engineering Standards (So Life Dev Log)
 
-This document defines the professional design standards for the "So Life Dev Log" Astro blog. Kiro should follow these standards for all UI/UX and styling tasks.
+This document combines advanced UI/UX principles and frontend engineering best practices to guide Kiro in building and maintaining this Astro blog.
 
-## 1. Visual Identity
-- **Vibe**: Clean, Professional, Developer-centric, Minimalist.
+## 1. Core Visual Identity & Design System
+- **Vibe**: Clean, Professional, Minimalist, Developer-centric.
 - **Theme**: Dark Mode only.
-- **Primary Color**: `#1a1a1a` (Background).
-- **Secondary Color**: `#242424` (Header, Footer, Sidebar).
-- **Accent Color**: `#00d4d4` (Cyan) - use for links, buttons, and highlights.
-- **Card Background**: `#2a2a2a`.
-- **Border Color**: `#3a3a3a`.
-- **Text Primary**: `#e5e5e5`.
-- **Text Secondary**: `#a0a0a0`.
+- **Color Palette (HSL/HEX)**:
+  - Background: `#1a1a1a` (Primary) / `#242424` (Secondary/Header/Footer/Sidebar).
+  - Cards: `#2a2a2a`.
+  - Accent: `#00d4d4` (Cyan) for links, active states, and primary actions.
+  - Border: `#3a3a3a`.
+  - Text: `#e5e5e5` (Primary) / `#a0a0a0` (Secondary).
+- **Spacing**: Follow a strict **8px grid scale**. Whitespace is a first-class citizen—give content room to breathe.
+- **Borders & Corners**: Consistent **12px border-radius** for cards and main containers. 1px solid borders using `--border-color`.
 
-## 2. Typography
+## 2. Typography Standards
 - **Primary Font**: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif.
-- **Body Text**: `18px`, line-height `1.7`.
-- **Headings**:
-  - H1: Bold, `2.5rem`, low letter-spacing.
+- **Readability**: 
+  - Body: `18px`, line-height `1.7`.
+  - Prose (Article) Max-width: **720px** for optimal reading experience.
+- **Headings**: Semantic use of H1-H6. 
+  - H1: Bold, `2.5rem`.
   - H2: Semi-bold, `2rem`.
-  - H3: Semi-bold, `1.5rem`.
-- **Code**: Monospace font, background matching `--bg-secondary`, rounded corners.
 
-## 3. Layout Standards
+## 3. Advanced UI/UX Patterns
+- **Glassmorphism**: Use backdrop filters and translucent layers sparingly for modern accents (e.g., sticky header).
+- **Bento Grid**: Use for dashboard-like layouts or post grids where appropriate.
+- **Micro-animations**: Interaction feedback (hover, click, focus) must be subtle (200-300ms transitions).
+  - Hover on Cards: `translateY(-4px)` with enhanced shadow.
+- **Consistency**: Always use CSS variables. No hardcoded colors or spacing.
+
+## 4. Frontend Engineering Principles
+- **Semantic HTML**: Mandatory use of `<nav>`, `<aside>`, `<main>`, `<article>`, `<footer>`.
+- **Component Strategy**: One component per file. Use PascalCase for components and kebab-case for filenames.
+- **Performance**: Target FCP < 1s. Avoid heavy custom JS; prefer Astro's zero-JS-by-default approach.
+- **Imports**: Use absolute paths (`@/components/...`) if configured, otherwise stay consistent.
+
+## 5. Layout & Composition (Priority Fix)
 - **Container**: Max-width `1100px`, centered.
-- **Sidebar (Left)**:
-  - Width: `240px` fixed on desktop.
-  - Position: Sticky (80px from top).
-  - Responsive: Moves to top/bottom or hidden on mobile (< 720px).
-- **Grid**: Use CSS Grid `auto-fill` with `minmax(300px, 1fr)` for post lists.
-- **Spacing**: Consistent 8px scale (padding: 1em, 1.5em, 2em).
+- **Composition**:
+  - Desktop: Sidebar (`240px`) + Main Content (`flex: 1`). Gap: `2.5em`.
+  - Sidebar should be `position: sticky` (top: 80px).
+  - Mobile (< 720px): Stack vertically. Sidebar content should be re-ordered or simplified.
+- **Search UI**: Minimalist input. Dropdown results must have high z-index and professional shadowing.
 
-## 4. Component Patterns
-- **Post Cards**:
-  - 1px solid border.
-  - 12px border-radius.
-  - `transition: transform 0.2s, box-shadow 0.2s`.
-  - Hover: `translateY(-4px)` and stronger box-shadow.
-- **Search**:
-  - Minimalist input.
-  - Results dropdown must have high z-index and shadow.
-- **Buttons/Links**:
-  - Hover should slightly brighten or change to accent color.
-  - No underlines by default.
+## 6. Content Policy
+- **Tone**: Professional, friendly, and 상냥한 (Polite Korean).
+- **Emoji Use**: Minimal. Use only for structural icons. No emoji overload in body text.
+- **AI Attribution**: All AI-generated posts must start with: "이 글은 AI(solifedev-bot)에 의해 작성되었습니다."
 
-## 5. Implementation Rules
-- **No Emoji Overload**: Use emojis only for structural icons (e.g., Search icon, Logo). Avoid them in body text unless requested.
-- **A11y**: Maintain high contrast ratios for readability.
-- **Responsive First**: Always ensure the layout works on mobile (1 column) and tablet.
-- **CSS Variables**: Use the defined CSS variables in `global.css` for consistency.
+## 7. Review Checklist
+- [ ] Semantic headings and ARIA labels.
+- [ ] Responsive behavior verified across devices.
+- [ ] Design tokens (CSS Variables) mapped 1:1.
+- [ ] No hardcoded layout hacks.

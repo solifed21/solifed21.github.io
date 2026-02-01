@@ -2,15 +2,9 @@
 import { getCollection } from 'astro:content';
 
 const posts = await getCollection('blog');
-
-// 카테고리 집계
 const categories = [...new Set(posts.map(p => p.data.category).filter(Boolean))];
-
-// 태그 집계
 const tagMap = new Map<string, number>();
-posts.forEach(p => {
-	p.data.tags?.forEach(tag => tagMap.set(tag, (tagMap.get(tag) || 0) + 1));
-});
+posts.forEach(p => p.data.tags?.forEach(tag => tagMap.set(tag, (tagMap.get(tag) || 0) + 1)));
 const tags = [...tagMap.entries()].sort((a, b) => b[1] - a[1]);
 ---
 
@@ -18,64 +12,63 @@ const tags = [...tagMap.entries()].sort((a, b) => b[1] - a[1]);
 	<section>
 		<h3>Categories</h3>
 		<ul>
-			{categories.map(cat => (
-				<li><a href={`/blog/category/${cat}/`}>{cat}</a></li>
-			))}
+			{categories.map(cat => <li><a href={`/blog/category/${cat}/`}>{cat}</a></li>)}
 		</ul>
 	</section>
 	<section>
 		<h3>Tags</h3>
 		<div class="tags">
-			{tags.map(([tag, count]) => (
-				<a href={`/blog/tag/${tag}/`} class="tag">{tag} ({count})</a>
-			))}
+			{tags.map(([tag, count]) => <a href={`/blog/tag/${tag}/`} class="tag">{tag} ({count})</a>)}
 		</div>
 	</section>
 </aside>
 
 <style>
 	.sidebar {
-		width: 240px;
+		width: var(--sidebar-width);
 		flex-shrink: 0;
 		position: sticky;
 		top: 80px;
 		height: fit-content;
-		padding: 1.25em;
+		padding: var(--space-3);
 		background: var(--bg-card);
-		border-radius: 12px;
+		border-radius: var(--radius);
 		border: 1px solid var(--border-color);
 	}
 	.sidebar h3 {
-		font-size: 0.85em;
+		font-size: 0.8rem;
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		margin-bottom: 0.75em;
+		letter-spacing: 0.08em;
+		margin-bottom: var(--space-2);
 		color: var(--accent);
+		font-weight: 600;
 	}
-	.sidebar section { margin-bottom: 1.5em; }
+	.sidebar section { margin-bottom: var(--space-3); }
 	.sidebar section:last-child { margin-bottom: 0; }
 	.sidebar ul { list-style: none; padding: 0; margin: 0; }
-	.sidebar li { margin-bottom: 0.4em; }
+	.sidebar li { margin-bottom: var(--space-1); }
 	.sidebar li a {
 		color: var(--text-secondary);
-		font-size: 0.9em;
-		transition: color 0.15s;
+		font-size: 0.9rem;
+		transition: color var(--transition);
 	}
 	.sidebar li a:hover { color: var(--accent); }
-	.tags { display: flex; flex-wrap: wrap; gap: 0.4em; }
+	.tags { display: flex; flex-wrap: wrap; gap: var(--space-1); }
 	.tag {
 		background: var(--bg-secondary);
-		padding: 0.2em 0.5em;
-		border-radius: 4px;
-		font-size: 0.8em;
+		padding: 6px 12px;
+		border-radius: var(--radius-sm);
+		font-size: 0.8rem;
 		color: var(--text-secondary);
-		transition: all 0.15s;
+		border: 1px solid var(--border-color);
+		transition: all var(--transition);
 	}
-	.tag:hover { background: var(--accent); color: var(--bg-primary); }
+	.tag:hover {
+		background: var(--accent);
+		color: var(--bg-primary);
+		border-color: var(--accent);
+	}
 	@media (max-width: 720px) {
-		.sidebar {
-			width: 100%;
-			position: static;
-		}
+		.sidebar { width: 100%; position: static; }
 	}
 </style>

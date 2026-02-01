@@ -2,8 +2,8 @@
 ---
 
 <div class="search-wrapper">
-	<input type="text" id="search-input" placeholder="검색..." autocomplete="off" />
-	<div id="search-results"></div>
+	<input type="text" id="search-input" placeholder="검색..." autocomplete="off" aria-label="블로그 검색" />
+	<div id="search-results" role="listbox"></div>
 </div>
 
 <script>
@@ -18,7 +18,7 @@
 			p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q)
 		).slice(0, 5);
 		results.innerHTML = matches.length
-			? matches.map((p: any) => `<a href="${p.url}">${p.title}</a>`).join('')
+			? matches.map((p: any) => `<a href="${p.url}" role="option">${p.title}</a>`).join('')
 			: '<span class="no-result">결과 없음</span>';
 	});
 
@@ -28,53 +28,52 @@
 </script>
 
 <style>
-	.search-wrapper {
-		position: relative;
-	}
+	.search-wrapper { position: relative; }
 	#search-input {
-		padding: 0.5em 0.75em;
+		padding: 10px 16px;
 		border: 1px solid var(--border-color);
-		border-radius: 8px;
+		border-radius: var(--radius);
 		background: var(--bg-primary);
 		color: var(--text-primary);
 		width: 200px;
-		font-size: 0.9em;
-		transition: border-color 0.2s, box-shadow 0.2s, width 0.2s;
+		font-size: 0.9rem;
+		transition: all var(--transition);
 	}
+	#search-input::placeholder { color: var(--text-secondary); }
 	#search-input:focus {
 		outline: none;
 		border-color: var(--accent);
 		box-shadow: 0 0 0 3px rgba(0, 212, 212, 0.15);
-		width: 240px;
+		width: 260px;
 	}
 	#search-results {
 		position: absolute;
-		top: calc(100% + 8px);
+		top: calc(100% + var(--space-1));
 		right: 0;
 		width: 320px;
 		max-height: 400px;
 		overflow-y: auto;
 		background: var(--bg-card);
 		border: 1px solid var(--border-color);
-		border-radius: 12px;
-		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+		border-radius: var(--radius);
+		box-shadow: var(--box-shadow-lg);
 		z-index: 200;
 	}
 	#search-results:empty { display: none; }
 	#search-results a, #search-results .no-result {
 		display: block;
-		padding: 0.85em 1em;
-		font-size: 0.9em;
+		padding: var(--space-2);
+		font-size: 0.9rem;
 		color: var(--text-primary);
 		border-bottom: 1px solid var(--border-color);
-		transition: background 0.15s;
+		transition: background var(--transition);
 	}
 	#search-results a:last-child { border-bottom: none; }
 	#search-results a:hover { background: var(--bg-secondary); color: var(--accent); }
 	.no-result { color: var(--text-secondary); }
 	@media (max-width: 720px) {
 		#search-input { width: 140px; }
-		#search-input:focus { width: 180px; }
+		#search-input:focus { width: 200px; }
 		#search-results { width: 280px; }
 	}
 </style>
