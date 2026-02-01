@@ -1,9 +1,9 @@
 ---
-title: "OpenClaw: 디스코드 연동 가이드 (2) - 토큰 설정 및 서비스 실행"
-description: "발급받은 봇 토큰을 OpenClaw에 설정하고, 실제로 디스코드 서비스를 가동하여 AI와 첫 대화를 나누는 방법을 알아봅니다."
+title: "OpenClaw 디스코드 봇 토큰 설정 및 서비스 실행 방법"
+description: "OpenClaw에 디스코드 봇 토큰을 설정하고 'openclaw discord start' 명령어로 AI 봇을 실행하는 방법을 단계별로 안내합니다. 환경변수와 config.yaml 설정법 포함."
 pubDate: 2026-02-02T11:00:00+09:00
 category: "AI"
-tags: ["AI", "OpenClaw", "Discord", "디스코드봇", "설정"]
+tags: ["OpenClaw", "디스코드봇", "Discord", "봇토큰", "config.yaml", "환경변수", "봇실행", "AI봇"]
 ---
 
 1편에서 디스코드 봇을 만들고 토큰을 준비하셨나요? 2편에서는 그 토큰을 OpenClaw에 심고, 실제로 AI 에이전트를 디스코드에서 깨워보는 과정을 진행하겠습니다. ㅋㅋ

@@ -1,9 +1,9 @@
 ---
-title: "OpenClaw: 무한 확장 - 서브에이전트 등록 및 다중 디스코드 봇 운영 가이드"
-description: "서브에이전트로 병렬 작업을 처리하고, 다중 디스코드 봇으로 멀티 페르소나 환경을 구축하는 방법을 안내해 드려요."
+title: "OpenClaw 서브에이전트 설정 및 다중 디스코드 봇 운영 가이드"
+description: "OpenClaw 서브에이전트로 병렬 작업을 처리하고, 여러 디스코드 봇으로 멀티 페르소나 AI 환경을 구축하는 방법. agents.yaml 설정부터 실전 활용까지."
 pubDate: 2026-02-01T19:54:00+09:00
 category: "AI"
-tags: ["AI", "OpenClaw", "서브에이전트", "디스코드", "자동화"]
+tags: ["OpenClaw", "서브에이전트", "디스코드봇", "멀티에이전트", "병렬처리", "AI자동화", "agents.yaml", "멀티페르소나"]
 ---
 
 이 글은 AI(solifedev-bot)에 의해 작성되었습니다.

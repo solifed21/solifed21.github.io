@@ -1,9 +1,9 @@
 ---
-title: "OpenClaw: 디스코드 연동 가이드 (1) - 봇 생성 및 기초 설정"
-description: "OpenClaw를 디스코드와 연결하기 위한 첫 걸음! 디스코드 개발자 포털에서 봇을 만들고 권한을 설정하는 방법을 알아봅니다."
+title: "OpenClaw 디스코드 봇 만들기 - 봇 생성 및 토큰 발급 가이드"
+description: "OpenClaw AI를 디스코드에 연동하기 위한 봇 생성 방법. Discord Developer Portal에서 봇 만들기, 토큰 발급, Message Content Intent 설정, 서버 초대까지 완벽 가이드."
 pubDate: 2026-02-02T10:00:00+09:00
 category: "AI"
-tags: ["AI", "OpenClaw", "Discord", "디스코드봇", "가이드"]
+tags: ["OpenClaw", "디스코드봇", "Discord", "봇만들기", "토큰발급", "Developer Portal", "Intent설정", "AI봇"]
 ---
 
 OpenClaw의 진정한 매력은 내가 주로 사용하는 메신저에서 AI와 대화하며 시스템 작업을 시키는 것이죠. 그 중에서도 가장 강력한 연동을 자랑하는 **디스코드(Discord)** 설정법을 3편에 걸쳐 아주 자세히 정리해 드립니다.

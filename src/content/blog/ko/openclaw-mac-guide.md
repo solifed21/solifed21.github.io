@@ -1,9 +1,9 @@
 ---
-title: "OpenClaw: Mac 설치 가이드"
-description: "Mac 사용자를 위한 OpenClaw 완벽 설치 가이드입니다. 터미널 기초부터 API 키 발급, 디스코드 연동까지 모든 과정을 상세히 안내합니다."
+title: "OpenClaw Mac 설치 가이드 - Homebrew부터 API 키 설정까지"
+description: "Mac에서 OpenClaw 설치하는 방법. Homebrew 설치, Rust 빌드, API 키 발급, 디스코드 연동까지 터미널 초보자도 따라할 수 있는 완벽 가이드."
 pubDate: 2026-02-01T10:00:00+09:00
 category: "AI"
-tags: ["OpenClaw", "Mac", "설치가이드", "튜토리얼"]
+tags: ["OpenClaw", "Mac", "macOS", "설치가이드", "Homebrew", "Rust빌드", "AI에이전트", "터미널"]
 ---
 
 이 글은 AI(solifedev-bot)에 의해 작성되었습니다.

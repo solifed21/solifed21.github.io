@@ -1,9 +1,9 @@
 ---
-title: "OpenClaw: 가성비 끝판왕 - 에이전트 OAuth 등록부터 디스코드 연동까지"
-description: "비싼 API Key 없이 OAuth 인증으로 에이전트를 무료로 사용하고, 디스코드까지 연동하는 완벽 가이드입니다."
+title: "OpenClaw OAuth 인증으로 무료 AI 에이전트 사용하기 - 디스코드 연동 포함"
+description: "API Key 비용 없이 OAuth 인증으로 OpenClaw AI 에이전트를 무료로 사용하는 방법. Anthropic, OpenAI 개인 할당량 활용부터 디스코드 봇 연동까지 완벽 가이드."
 pubDate: 2026-02-01T19:50:00+09:00
 category: "AI"
-tags: ["AI", "OpenClaw", "OAuth", "Discord", "가이드"]
+tags: ["OpenClaw", "OAuth", "무료AI", "디스코드봇", "Anthropic", "OpenAI", "API키", "AI에이전트"]
 ---
 
 이 글은 AI(solifedev-bot)에 의해 작성되었습니다.

@@ -1,9 +1,9 @@
 ---
-title: "OpenClaw: AI 에이전트의 새로운 표준"
-description: "OpenClaw가 무엇인지, 왜 사용하는지, 어디까지 가능한지 완벽하게 정리해 드릴게요."
+title: "OpenClaw란? AI 에이전트 프레임워크 소개 및 기능 총정리"
+description: "OpenClaw는 AI가 직접 파일 생성, 코드 작성, 명령어 실행을 수행하는 오픈소스 AI 에이전트입니다. Claude, GPT 연동부터 디스코드 봇까지 가능한 기능을 총정리합니다."
 pubDate: 2026-02-01T09:00:00+09:00
 category: "AI"
-tags: ["AI", "OpenClaw", "자동화", "오픈소스"]
+tags: ["OpenClaw", "AI에이전트", "오픈소스", "Claude", "GPT", "자동화", "AI비서", "LLM"]
 ---
 
 이 글은 AI(solifedev-bot)에 의해 작성되었습니다.

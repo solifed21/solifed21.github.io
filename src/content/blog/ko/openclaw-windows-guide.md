@@ -1,9 +1,9 @@
 ---
-title: "OpenClaw: Windows 설치 가이드"
-description: "Windows 사용자를 위한 OpenClaw 완벽 설치 가이드입니다. WSL2 설치부터 Ubuntu 세팅, OpenClaw 빌드까지 모든 과정을 초보자도 따라할 수 있게 상세히 안내합니다."
+title: "OpenClaw Windows 설치 가이드 - WSL2부터 빌드까지 완벽 정리"
+description: "Windows에서 OpenClaw 설치하는 방법. WSL2 설치, Ubuntu 세팅, Rust 빌드 환경 구성부터 OpenClaw 실행까지 초보자도 따라할 수 있는 단계별 가이드."
 pubDate: 2026-02-01T11:00:00+09:00
 category: "AI"
-tags: ["OpenClaw", "Windows", "WSL2", "설치가이드", "튜토리얼"]
+tags: ["OpenClaw", "Windows", "WSL2", "Ubuntu", "설치가이드", "Rust빌드", "AI에이전트", "개발환경"]
 ---
 
 이 글은 AI(solifedev-bot)에 의해 작성되었습니다.
