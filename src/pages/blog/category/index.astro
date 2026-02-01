@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../../components/BaseHead.astro';
+import Footer from '../../../components/Footer.astro';
+import Header from '../../../components/Header.astro';
+import { SITE_TITLE } from '../../../consts';
+
+const posts = await getCollection('blog');
+const categoryCount = posts.reduce((acc, post) => {
+	const cat = post.data.category;
+	if (cat) acc[cat] = (acc[cat] || 0) + 1;
+	return acc;
+}, {} as Record<string, number>);
+const categories = Object.entries(categoryCount).sort((a, b) => b[1] - a[1]);
+---
+
+<!doctype html>
+<html lang="ko">
+	<head>
+		<BaseHead title={`Categories - ${SITE_TITLE}`} description="블로그 카테고리 목록" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Categories</h1>
+			<ul class="category-list">
+				{categories.map(([name, count]) => (
+					<li>
+						<a href={`/blog/category/${name}/`}>
+							<span class="name">{name}</span>
+							<span class="count">{count}</span>
+						</a>
+					</li>
+				))}
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	h1 { margin-bottom: 1em; }
+	.category-list {
+		list-style: none;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		gap: 1em;
+	}
+	.category-list a {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1em 1.25em;
+		background: var(--bg-card);
+		border: 1px solid var(--border-color);
+		border-radius: 8px;
+		color: inherit;
+		transition: transform 0.2s, box-shadow 0.2s;
+	}
+	.category-list a:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--box-shadow);
+	}
+	.name { font-weight: 500; }
+	.count {
+		background: var(--accent);
+		color: var(--bg-primary);
+		padding: 0.2em 0.6em;
+		border-radius: 12px;
+		font-size: 0.85em;
+	}
+</style>
