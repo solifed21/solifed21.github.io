@@ -28,6 +28,7 @@ const posts = (await getCollection('blog'))
 	<body>
 		<Header />
 		<div class="layout">
+			<Sidebar />
 			<main>
 				<h1>{category}</h1>
 				<p class="count">{posts.length}개의 글</p>
@@ -47,7 +48,6 @@ const posts = (await getCollection('blog'))
 					))}
 				</ul>
 			</main>
-			<Sidebar />
 		</div>
 		<Footer />
 	</body>

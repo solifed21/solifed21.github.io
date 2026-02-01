@@ -23,6 +23,7 @@ const categories = Object.entries(categoryCount).sort((a, b) => b[1] - a[1]);
 	<body>
 		<Header />
 		<div class="layout">
+			<Sidebar />
 			<main>
 				<h1>Categories</h1>
 				<ul class="category-list">
@@ -36,7 +37,6 @@ const categories = Object.entries(categoryCount).sort((a, b) => b[1] - a[1]);
 					))}
 				</ul>
 			</main>
-			<Sidebar />
 		</div>
 		<Footer />
 	</body>
