@@ -1,5 +1,5 @@
 ---
-title: "OpenClaw Windows 설치 가이드"
+title: "OpenClaw: Windows 설치 가이드"
 description: "Windows 사용자를 위한 OpenClaw 완벽 설치 가이드입니다. WSL2 설치부터 Ubuntu 세팅, OpenClaw 빌드까지 모든 과정을 초보자도 따라할 수 있게 상세히 안내합니다."
 pubDate: 2026-02-01T11:00:00+09:00
 category: "AI"
@@ -223,8 +223,12 @@ nvm --version
 
 **4단계: Node.js LTS 버전 설치**
 
+OpenClaw는 **Node.js 22 이상**이 필요합니다:
+
 ```bash
-nvm install --lts
+nvm install 22
+nvm use 22
+nvm alias default 22
 ```
 
 **5단계: Node.js 버전 확인**
@@ -234,7 +238,7 @@ node --version
 npm --version
 ```
 
-Node.js 18.x 이상, npm 9.x 이상이 설치되어 있으면 됩니다.
+Node.js 22.x 이상, npm 10.x 이상이 설치되어 있으면 됩니다.
 
 ### pnpm 설치
 
@@ -323,6 +327,8 @@ pnpm link --global
 
 OpenClaw를 사용하려면 AI 모델의 API 키가 필요합니다. Claude(Anthropic) 또는 OpenAI 중 하나를 선택하시면 됩니다.
 
+**참고:** OAuth 인증을 사용하면 API 키 없이도 무료 할당량을 활용할 수 있습니다. `openclaw onboard`에서 Anthropic OAuth 또는 OpenAI OAuth를 선택하세요.
+
 ### Claude API 키 발급 (Anthropic)
 
 Claude는 Anthropic에서 만든 AI 모델입니다. 자연스러운 대화와 코딩 능력이 뛰어나요.
@@ -365,18 +371,17 @@ openclaw onboard
 
 온보딩 마법사가 시작되면 안내에 따라 진행하세요:
 
-1. **AI 모델 선택**: Claude 또는 OpenAI 중 선택
-2. **API 키 입력**: 발급받은 API 키를 붙여넣기
+1. **AI 모델 선택**: Anthropic OAuth, OpenAI OAuth, 또는 직접 API 키 입력 중 선택
+2. **인증 진행**: OAuth 선택 시 브라우저 인증, manual 선택 시 API 키 붙여넣기
 3. **기본 설정 확인**: 기본값으로 진행해도 됩니다
 
 ```
 🦞 Welcome to OpenClaw Onboarding!
 
-? Select your AI provider: (Use arrow keys)
-❯ Claude (Anthropic)
-  OpenAI (GPT)
-
-? Enter your API key: ************************************
+? Select your authentication method:
+❯ Anthropic OAuth (Claude)
+  OpenAI OAuth (GPT)
+  manual (직접 API Key 입력)
 
 ✅ Configuration saved successfully!
 ```
@@ -532,7 +537,18 @@ source ~/.bashrc
 nvm install --lts
 ```
 
-### pnpm install 중 에러 발생
+### Node.js 버전 오류
+
+**원인:** Node.js 22 미만 버전이 설치되어 있습니다.
+
+**해결 방법:**
+
+```bash
+# nvm으로 Node.js 22 설치
+nvm install 22
+nvm use 22
+nvm alias default 22
+```
 
 **원인:** 네트워크 문제 또는 의존성 충돌
 
@@ -636,7 +652,7 @@ cd /mnt/c/Users/username/projects/openclaw
 
 ### 사전 요구사항
 
-- Node.js 18 이상 (공식 사이트에서 Windows 설치 파일 다운로드)
+- Node.js 22 이상 (공식 사이트에서 Windows 설치 파일 다운로드)
 - Git for Windows
 - pnpm (`npm install -g pnpm`)
 
@@ -663,6 +679,12 @@ Native Windows 지원은 계속 개선 중이니, 최신 정보는 공식 문서
 ## 마무리
 
 축하합니다! Windows에서 WSL2를 통해 OpenClaw 설치를 완료하셨습니다. 이제 강력한 AI 어시스턴트와 함께 다양한 작업을 수행하실 수 있어요.
+
+**Windows 설치 핵심 요약:**
+- **권장 방식**: WSL2 + Ubuntu 환경에서 설치
+- **Node.js 요구사항**: 버전 22 이상 필요
+- **설치 순서**: `pnpm install` → `pnpm build` → `openclaw onboard`
+- **OAuth 등록**: `openclaw onboard` 마법사에서 Anthropic OAuth 또는 OpenAI OAuth 선택
 
 **다음 단계로 추천드리는 것들:**
 - 다양한 프롬프트를 시도해 보세요.

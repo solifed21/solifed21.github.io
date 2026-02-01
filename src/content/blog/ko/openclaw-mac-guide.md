@@ -1,5 +1,5 @@
 ---
-title: "OpenClaw Mac 설치 가이드"
+title: "OpenClaw: Mac 설치 가이드"
 description: "Mac 사용자를 위한 OpenClaw 완벽 설치 가이드입니다. 터미널 기초부터 API 키 발급, 디스코드 연동까지 모든 과정을 상세히 안내합니다."
 pubDate: 2026-02-01T10:00:00+09:00
 category: "AI"
@@ -118,7 +118,7 @@ brew --version
 
 ### 방법 1: OpenClaw.app 설치 (Stable Workflow - 권장)
 
-**가장 안정적이고 편리한 방법**입니다. 메뉴 바에서 바로 접근할 수 있는 앱 형태로 제공되어, 터미널 없이도 쉽게 사용하실 수 있어요.
+**가장 안정적이고 편리한 방법**입니다. 메뉴 바에서 바로 접근할 수 있는 앱 형태로 제공되어, 터미널 없이도 쉽게 사용하실 수 있어요. 이 방법이 공식적으로 권장되는 'Stable workflow'입니다.
 
 #### 장점
 - 설치가 매우 간단합니다
@@ -165,7 +165,27 @@ brew --version
 
 #### 설치 방법
 
-**1단계: OpenClaw 설치**
+**1단계: Node.js 버전 확인**
+
+OpenClaw는 **Node.js 22 이상**이 필요합니다. 먼저 버전을 확인하세요:
+
+```bash
+node --version
+```
+
+버전이 22 미만이거나 설치되어 있지 않다면, nvm을 사용하여 설치하세요:
+
+```bash
+# nvm이 없다면 먼저 설치
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+source ~/.zprofile
+
+# Node.js 22 설치
+nvm install 22
+nvm use 22
+```
+
+**2단계: OpenClaw 설치**
 
 터미널에서 아래 명령어를 실행하세요:
 
@@ -175,7 +195,7 @@ brew install openclaw
 
 설치에는 보통 1~2분 정도 소요됩니다. 진행 상황이 터미널에 표시되니 기다려 주세요.
 
-**2단계: 설치 확인**
+**3단계: 설치 확인**
 
 설치가 완료되면 버전을 확인해 보세요:
 
@@ -184,16 +204,6 @@ openclaw --version
 ```
 
 `openclaw version 1.x.x` 같은 형태로 버전 정보가 출력되면 성공입니다!
-
-**3단계: 초기 설정 (Setup)**
-
-OpenClaw를 처음 사용하기 전에 초기 설정을 진행합니다:
-
-```bash
-openclaw setup
-```
-
-이 명령어는 OpenClaw가 사용할 기본 디렉토리와 설정 파일을 생성합니다.
 
 **4단계: 온보딩 (Onboard)**
 
@@ -204,15 +214,34 @@ openclaw onboard
 ```
 
 온보딩 마법사가 시작되면 안내에 따라 진행하세요:
-1. 사용할 AI 모델 선택 (Claude / OpenAI)
-2. API 키 입력
+
+```
+🦞 Welcome to OpenClaw Onboarding!
+
+? Select your authentication method:
+❯ Anthropic OAuth (Claude)
+  OpenAI OAuth (GPT)
+  manual (직접 API Key 입력)
+```
+
+1. 사용할 AI 모델 선택 (Claude의 경우 Anthropic OAuth, OpenAI의 경우 OpenAI OAuth)
+2. 브라우저 인증 또는 API 키 입력
 3. 기본 설정 확인
+
+**설치 순서 요약:**
+```
+brew install openclaw → openclaw onboard
+```
+
+이 순서를 따르시면 Mac에서 CLI 버전 OpenClaw를 완벽하게 설정하실 수 있어요!
 
 ---
 
 ## Step 4: API 키 발급받기
 
 OpenClaw를 사용하려면 AI 모델의 API 키가 필요합니다. Claude(Anthropic) 또는 OpenAI 중 하나를 선택하시면 됩니다. 둘 다 발급받아 두시면 상황에 따라 선택해서 사용하실 수 있어요!
+
+**참고:** OAuth 인증을 사용하면 API 키 없이도 무료 할당량을 활용할 수 있습니다. `openclaw onboard`에서 Anthropic OAuth 또는 OpenAI OAuth를 선택하세요.
 
 ### Claude API 키 발급 (Anthropic)
 
@@ -369,8 +398,21 @@ OpenClaw를 디스코드와 연동하면 디스코드 서버에서 바로 AI와 
 
 **CLI 사용자:**
 
+설정 파일(`~/.openclaw/config.yaml`)을 열고 다음과 같이 설정합니다:
+
+```yaml
+channels:
+  discord:
+    enabled: true
+    botToken: "YOUR_BOT_TOKEN"
+    agentMappings:
+      - channelId: "채널ID"
+        agentName: "에이전트이름"
+```
+
+그 후 디스코드 서비스를 시작합니다:
+
 ```bash
-openclaw config set discord.token "YOUR_BOT_TOKEN"
 openclaw discord start
 ```
 
@@ -424,6 +466,19 @@ brew install openclaw
 3. 설치되어 있는데 안 된다면 터미널을 재시작하거나:
 ```bash
 source ~/.zprofile
+```
+
+### Node.js 버전 오류
+
+**원인:** Node.js 22 미만 버전이 설치되어 있습니다.
+
+**해결 방법:**
+
+```bash
+# nvm으로 Node.js 22 설치
+nvm install 22
+nvm use 22
+nvm alias default 22
 ```
 
 ### API 키 오류 (Invalid API Key)
@@ -511,6 +566,12 @@ brew cleanup
 ## 마무리
 
 축하합니다! Mac에서 OpenClaw 설치를 완료하셨습니다. 이제 강력한 AI 어시스턴트와 함께 다양한 작업을 수행하실 수 있어요.
+
+**Mac 설치 핵심 요약:**
+- **Stable Workflow (권장)**: OpenClaw.app 메뉴 바 앱 설치
+- **CLI 설치 순서**: `brew install openclaw` → `openclaw onboard`
+- **Node.js 요구사항**: 버전 22 이상 필요
+- **OAuth 등록**: `openclaw onboard` 마법사에서 Anthropic OAuth 또는 OpenAI OAuth 선택
 
 **다음 단계로 추천드리는 것들:**
 - 다양한 프롬프트를 시도해 보세요.
