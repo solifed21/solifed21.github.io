@@ -1,0 +1,68 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseHead from '../../../components/BaseHead.astro';
+import Footer from '../../../components/Footer.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
+import Header from '../../../components/Header.astro';
+import Sidebar from '../../../components/Sidebar.astro';
+import { SITE_TITLE } from '../../../consts';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	const tags = [...new Set(posts.flatMap(p => p.data.tags || []))];
+	return tags.map(tag => ({
+		params: { tag },
+		props: { posts: posts.filter(p => p.data.tags?.includes(tag)) },
+	}));
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+const sorted = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<!doctype html>
+<html lang="ko">
+	<head>
+		<BaseHead title={`${tag} - ${SITE_TITLE}`} description={`${tag} 태그 글 목록`} />
+	</head>
+	<body>
+		<Header />
+		<div class="layout">
+			<Sidebar />
+			<main>
+				<h1>#{tag}</h1>
+				<ul class="post-grid">
+					{sorted.map((post) => (
+						<li class="post-card">
+							<a href={`/blog/${post.id}/`}>
+								{post.data.heroImage && <Image width={720} height={360} src={post.data.heroImage} alt="" />}
+								<div class="content">
+									<h2>{post.data.title}</h2>
+									<span class="date"><FormattedDate date={post.data.pubDate} /></span>
+								</div>
+							</a>
+						</li>
+					))}
+				</ul>
+			</main>
+		</div>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.layout { display: flex; gap: 2em; max-width: 1100px; margin: 0 auto; padding: 2em 1em; }
+	main { flex: 1; }
+	h1 { margin-bottom: 1em; }
+	.post-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5em; list-style: none; padding: 0; }
+	.post-card { background: var(--bg-card); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); }
+	.post-card:hover { transform: translateY(-4px); box-shadow: var(--box-shadow); }
+	.post-card a { display: block; color: inherit; }
+	.post-card img { width: 100%; aspect-ratio: 2/1; object-fit: cover; }
+	.post-card .content { padding: 1em; }
+	.post-card h2 { font-size: 1.1em; margin-bottom: 0.5em; }
+	.post-card .date { color: var(--text-secondary); font-size: 0.85em; }
+	@media (max-width: 720px) { .layout { flex-direction: column; } .post-grid { grid-template-columns: 1fr; } }
+</style>

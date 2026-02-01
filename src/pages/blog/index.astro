@@ -5,6 +5,7 @@ import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
+import Sidebar from '../../components/Sidebar.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
 const posts = (await getCollection('blog')).sort(
@@ -19,39 +20,48 @@ const posts = (await getCollection('blog')).sort(
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>Blog</h1>
-			<ul class="post-grid">
-				{posts.map((post) => (
-					<li class="post-card">
-						<a href={`/blog/${post.id}/`}>
-							{post.data.heroImage && (
-								<Image width={720} height={360} src={post.data.heroImage} alt="" />
-							)}
-							<div class="content">
-								<h2>{post.data.title}</h2>
-								<div class="meta">
-									<span class="date"><FormattedDate date={post.data.pubDate} /></span>
-									{post.data.category && (
-										<a href={`/blog/category/${post.data.category}/`} class="category-tag" onclick="event.stopPropagation()">
-											{post.data.category}
-										</a>
-									)}
+		<div class="layout">
+			<Sidebar />
+			<main>
+				<h1>Blog</h1>
+				<ul class="post-grid">
+					{posts.map((post) => (
+						<li class="post-card">
+							<a href={`/blog/${post.id}/`}>
+								{post.data.heroImage && (
+									<Image width={720} height={360} src={post.data.heroImage} alt="" />
+								)}
+								<div class="content">
+									<h2>{post.data.title}</h2>
+									<div class="meta">
+										<span class="date"><FormattedDate date={post.data.pubDate} /></span>
+										{post.data.category && (
+											<a href={`/blog/category/${post.data.category}/`} class="category-tag" onclick="event.stopPropagation()">
+												{post.data.category}
+											</a>
+										)}
+									</div>
 								</div>
-							</div>
-						</a>
-					</li>
-				))}
-			</ul>
-		</main>
+							</a>
+						</li>
+					))}
+				</ul>
+			</main>
+		</div>
 		<Footer />
 	</body>
 </html>
 
 <style>
-	h1 {
-		margin-bottom: 1em;
+	.layout {
+		display: flex;
+		gap: 2em;
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 2em 1em;
 	}
+	main { flex: 1; }
+	h1 { margin-bottom: 1em; }
 	.post-grid {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
@@ -71,29 +81,11 @@ const posts = (await getCollection('blog')).sort(
 		transform: translateY(-4px);
 		box-shadow: var(--box-shadow);
 	}
-	.post-card a {
-		display: block;
-		color: inherit;
-	}
-	.post-card img {
-		width: 100%;
-		aspect-ratio: 2/1;
-		object-fit: cover;
-		border-radius: 0;
-	}
-	.post-card .content {
-		padding: 1em;
-	}
-	.post-card h2 {
-		font-size: 1.1em;
-		margin-bottom: 0.5em;
-	}
-	.post-card .meta {
-		display: flex;
-		align-items: center;
-		gap: 0.75em;
-		font-size: 0.85em;
-	}
+	.post-card a { display: block; color: inherit; }
+	.post-card img { width: 100%; aspect-ratio: 2/1; object-fit: cover; border-radius: 0; }
+	.post-card .content { padding: 1em; }
+	.post-card h2 { font-size: 1.1em; margin-bottom: 0.5em; }
+	.post-card .meta { display: flex; align-items: center; gap: 0.75em; font-size: 0.85em; }
 	.post-card .date { color: var(--text-secondary); }
 	.post-card .category-tag {
 		background: var(--accent);
@@ -104,8 +96,7 @@ const posts = (await getCollection('blog')).sort(
 	}
 	.post-card .category-tag:hover { opacity: 0.8; }
 	@media (max-width: 720px) {
-		.post-grid {
-			grid-template-columns: 1fr;
-		}
+		.layout { flex-direction: column; }
+		.post-grid { grid-template-columns: 1fr; }
 	}
 </style>

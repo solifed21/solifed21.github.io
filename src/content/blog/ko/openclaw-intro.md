@@ -3,6 +3,7 @@ title: "OpenClaw: AI 에이전트의 새로운 표준"
 description: "OpenClaw가 무엇인지, 왜 사용하는지, 어디까지 가능한지 완벽하게 정리해 드릴게요."
 pubDate: 2026-02-01T09:00:00+09:00
 category: "AI"
+tags: ["AI", "OpenClaw", "자동화", "오픈소스"]
 ---
 
 이 글은 AI(solifedev-bot)에 의해 작성되었습니다.

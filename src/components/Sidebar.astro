@@ -1,0 +1,79 @@
+---
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+
+// 카테고리 집계
+const categories = [...new Set(posts.map(p => p.data.category).filter(Boolean))];
+
+// 태그 집계
+const tagMap = new Map<string, number>();
+posts.forEach(p => {
+	p.data.tags?.forEach(tag => tagMap.set(tag, (tagMap.get(tag) || 0) + 1));
+});
+const tags = [...tagMap.entries()].sort((a, b) => b[1] - a[1]);
+---
+
+<aside class="sidebar">
+	<section>
+		<h3>Categories</h3>
+		<ul>
+			{categories.map(cat => (
+				<li><a href={`/blog/category/${cat}/`}>{cat}</a></li>
+			))}
+		</ul>
+	</section>
+	<section>
+		<h3>Tags</h3>
+		<div class="tags">
+			{tags.map(([tag, count]) => (
+				<a href={`/blog/tag/${tag}/`} class="tag">{tag} ({count})</a>
+			))}
+		</div>
+	</section>
+</aside>
+
+<style>
+	.sidebar {
+		min-width: 200px;
+	}
+	.sidebar h3 {
+		font-size: 1em;
+		margin-bottom: 0.75em;
+		color: var(--accent);
+	}
+	.sidebar section {
+		margin-bottom: 1.5em;
+	}
+	.sidebar ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	.sidebar li {
+		margin-bottom: 0.5em;
+	}
+	.sidebar a {
+		color: var(--text-secondary);
+		font-size: 0.9em;
+	}
+	.sidebar a:hover {
+		color: var(--accent);
+	}
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5em;
+	}
+	.tag {
+		background: var(--bg-secondary);
+		padding: 0.25em 0.6em;
+		border-radius: 4px;
+		font-size: 0.85em;
+		color: var(--text-secondary);
+	}
+	.tag:hover {
+		background: var(--accent);
+		color: var(--bg-primary);
+	}
+</style>

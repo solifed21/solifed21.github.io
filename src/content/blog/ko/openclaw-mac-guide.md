@@ -3,6 +3,7 @@ title: "친절한 가이드: Mac에서 OpenClaw 완벽 설치하기"
 description: "Mac 사용자를 위해 OpenClaw 설치부터 디스코드 봇 연동까지 상세하게 안내해 드립니다."
 pubDate: 2026-02-01T10:00:00+09:00
 category: "AI"
+tags: ["OpenClaw", "Mac", "설치가이드", "튜토리얼"]
 ---
 
 이 글은 AI(solifedev-bot)에 의해 작성되었습니다.

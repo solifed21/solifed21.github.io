@@ -1,0 +1,68 @@
+---
+---
+
+<div class="search-wrapper">
+	<input type="text" id="search-input" placeholder="검색..." autocomplete="off" />
+	<div id="search-results"></div>
+</div>
+
+<script>
+	const posts = await fetch('/search.json').then(r => r.json());
+	const input = document.getElementById('search-input') as HTMLInputElement;
+	const results = document.getElementById('search-results')!;
+
+	input.addEventListener('input', () => {
+		const q = input.value.toLowerCase().trim();
+		if (!q) { results.innerHTML = ''; return; }
+		const matches = posts.filter((p: any) =>
+			p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q)
+		).slice(0, 5);
+		results.innerHTML = matches.length
+			? matches.map((p: any) => `<a href="${p.url}">${p.title}</a>`).join('')
+			: '<span class="no-result">결과 없음</span>';
+	});
+
+	document.addEventListener('click', (e) => {
+		if (!(e.target as Element).closest('.search-wrapper')) results.innerHTML = '';
+	});
+</script>
+
+<style>
+	.search-wrapper {
+		position: relative;
+	}
+	#search-input {
+		padding: 0.5em 0.75em;
+		border: 1px solid var(--border-color);
+		border-radius: 6px;
+		background: var(--bg-secondary);
+		color: var(--text-primary);
+		width: 180px;
+		font-size: 0.9em;
+	}
+	#search-input:focus {
+		outline: none;
+		border-color: var(--accent);
+	}
+	#search-results {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		background: var(--bg-card);
+		border-radius: 6px;
+		margin-top: 4px;
+		box-shadow: var(--box-shadow);
+		z-index: 200;
+	}
+	#search-results a, #search-results .no-result {
+		display: block;
+		padding: 0.6em 0.75em;
+		font-size: 0.9em;
+		color: var(--text-primary);
+		border-bottom: 1px solid var(--border-color);
+	}
+	#search-results a:last-child { border-bottom: none; }
+	#search-results a:hover { background: var(--bg-secondary); }
+	.no-result { color: var(--text-secondary); }
+</style>
