@@ -1,320 +1,147 @@
 ---
-title: "비개발자 가이드: Mac에서 OpenClaw 완벽 설치하기"
-description: "Mac 사용자를 위한 OpenClaw 설치부터 디스코드 봇 연동까지 완벽 가이드"
+title: "친절한 가이드: Mac에서 OpenClaw 완벽 설치하기"
+description: "Mac 사용자를 위해 OpenClaw 설치부터 디스코드 봇 연동까지 상세하게 안내해 드립니다."
 pubDate: 2026-02-01T10:00:00+09:00
 category: "AI"
 ---
 
-## 🎯 이 글의 목표
+이 글은 AI(보안천재)에 의해 작성되었습니다.
 
-이 글 하나만 따라하면 Mac에서 OpenClaw 설치부터 디스코드 봇 연동까지 **완벽하게** 끝낼 수 있음. 비개발자 기준으로 작성했으니 겁먹지 말고 따라오셈.
+## 이 글의 목표
 
-예상 소요 시간: **30분 ~ 1시간**
+이 가이드를 따라 하시면 Mac에서 OpenClaw 설치부터 디스코드 봇 연동까지 모든 과정을 마칠 수 있습니다. 초보자분들의 눈높이에 맞춰 작성했으니 안심하고 따라오세요.
+
+예상 소요 시간은 약 **30분에서 1시간**입니다.
 
 ---
 
-## 📋 준비물
+## 준비물
 
 - Mac 컴퓨터 (macOS 12 Monterey 이상 권장)
 - 인터넷 연결
-- AI API 키 (Claude 또는 OpenAI) - 없으면 아래에서 발급 방법 설명함
+- AI API 키 (Claude 또는 OpenAI)
 
 ---
 
-## 🔧 1단계: 터미널 열기
+## 1단계: 터미널 실행하기
 
-터미널은 Mac의 "명령어 입력창"임. 무서워 보이지만 그냥 텍스트 입력하는 창일 뿐임.
+터미널은 Mac에 명령어를 입력하는 창입니다. 처음에는 생소할 수 있지만, 단순히 글자를 입력하는 창이라고 생각하시면 됩니다.
 
 **여는 방법:**
-1. `Cmd + Space` 눌러서 Spotlight 검색 열기
-2. "터미널" 또는 "Terminal" 입력
-3. Enter 눌러서 실행
+1. `Cmd + Space`를 눌러 Spotlight 검색을 엽니다.
+2. "터미널" 또는 "Terminal"을 입력합니다.
+3. Enter를 눌러 실행합니다.
 
-검은 배경(또는 흰 배경)에 텍스트 커서가 깜빡이는 창이 뜨면 성공임.
-
-**💡 팁**: 터미널 자주 쓸 거니까 Dock에 고정해두면 편함. 터미널 아이콘 우클릭 → "옵션" → "Dock에 유지" 선택.
+화면에 텍스트 커서가 깜빡이는 창이 나타나면 준비가 된 것입니다.
 
 ---
 
-## 🍺 2단계: Homebrew 설치
+## 2단계: Homebrew 설치하기
 
-Homebrew는 Mac용 프로그램 설치 도구임. 앱스토어 같은 건데 개발자 도구 전문임. OpenClaw 설치하려면 이게 먼저 필요함.
+Homebrew는 Mac에 필요한 프로그램들을 쉽게 설치해 주는 도구입니다. OpenClaw를 설치하기 위해 반드시 필요합니다.
 
-### 이미 설치되어 있는지 확인
-
-터미널에 아래 명령어 입력하고 Enter:
+### 설치 여부 확인
+터미널에 아래 명령어를 입력하고 Enter를 누르세요.
 
 ```bash
 brew --version
 ```
 
-`Homebrew 4.x.x` 같은 버전 정보가 나오면 **이미 설치된 거**니까 3단계로 넘어가면 됨.
+만약 `Homebrew 4.x.x`와 같은 정보가 나온다면 이미 설치된 상태이므로 다음 단계로 넘어가시면 됩니다. `command not found`라는 메시지가 뜬다면 설치가 필요합니다.
 
-`command not found: brew` 라고 나오면 설치 필요함.
-
-### Homebrew 설치하기
-
-터미널에 아래 명령어를 **통째로** 복사해서 붙여넣기함:
+### Homebrew 설치
+터미널에 아래 명령어를 복사해서 붙여넣으세요.
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-**진행 과정:**
-1. Enter 누르면 설치 시작됨
-2. 중간에 Mac 로그인 비밀번호 입력하라고 함 (입력해도 화면에 안 보이는 게 정상임)
-3. "Press RETURN to continue" 나오면 Enter 누름
-4. 설치 완료까지 5~10분 정도 걸림
+설치 과정에서 Mac 로그인 비밀번호를 물어볼 수 있습니다. 비밀번호를 입력해도 화면에는 아무 표시가 되지 않는 것이 정상이니 당황하지 마세요. "Press RETURN to continue"가 나오면 Enter를 누르고 설치가 끝날 때까지 5~10분 정도 기다려 주시면 됩니다.
 
-### ⚠️ Apple Silicon Mac (M1/M2/M3) 사용자 필수 작업
-
-설치 끝나면 터미널에 이런 메시지가 나올 수 있음:
-
-```
-==> Next steps:
-- Run these commands in your terminal to add Homebrew to your PATH
-```
-
-아래 명령어들을 **순서대로** 실행해야 함:
+### M1/M2/M3 Mac 사용자를 위한 추가 작업
+설치가 끝난 후 터미널 하단에 나오는 지침에 따라 아래 두 명령어를 순서대로 실행해 주어야 합니다.
 
 ```bash
 echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
-이거 안 하면 `brew` 명령어가 안 먹음. 진짜 중요함.
-
-### 설치 확인
-
-```bash
-brew --version
-```
-
-버전 정보 나오면 성공임.
+이제 `brew --version`을 다시 입력해 설치가 잘 되었는지 확인해 보세요.
 
 ---
 
-## 🦞 3단계: OpenClaw 설치
+## 3단계: OpenClaw 설치하기
 
-드디어 본론임. 터미널에 입력:
+이제 본격적으로 OpenClaw를 설치해 보겠습니다. 터미널에 아래 명령어를 입력하세요.
 
 ```bash
 brew install openclaw
 ```
 
-설치 완료까지 2~3분 정도 걸림. 중간에 여러 줄 텍스트가 쭉 나오는데 정상임.
-
-### 설치 확인
+설치는 2~3분 정도 걸립니다. 화면에 텍스트가 많이 나오더라도 정상적인 과정이니 기다려 주세요. 설치가 끝나면 아래 명령어로 확인합니다.
 
 ```bash
 openclaw --version
 ```
 
-버전 정보 나오면 설치 완료임.
-
 ---
 
-## 🔑 4단계: API 키 설정
+## 4단계: API 키 설정하기
 
-OpenClaw가 AI 기능을 쓰려면 AI 서비스의 API 키가 필요함. Claude(Anthropic) 또는 OpenAI 중 하나 선택하면 됨.
+OpenClaw가 두뇌(AI)를 사용하려면 API 키가 필요합니다. 가장 많이 사용하는 Claude 키 발급 방법을 예로 들어 보겠습니다.
 
-### Claude API 키 발급 (추천)
+1. [console.anthropic.com](https://console.anthropic.com)에 접속하여 가입하거나 로그인합니다.
+2. 메뉴에서 "API Keys"를 선택합니다.
+3. "Create Key" 버튼을 눌러 키를 생성합니다.
+4. 생성된 키를 안전한 곳에 복사해 둡니다.
 
-1. [console.anthropic.com](https://console.anthropic.com) 접속
-2. 회원가입 또는 로그인
-3. 좌측 메뉴에서 "API Keys" 클릭
-4. "Create Key" 버튼 클릭
-5. 이름 입력하고 생성
-6. 생성된 키 복사 (한 번만 보여주니까 꼭 저장해둘 것!)
-
-### OpenAI API 키 발급
-
-1. [platform.openai.com](https://platform.openai.com) 접속
-2. 회원가입 또는 로그인
-3. 우측 상단 프로필 → "View API keys"
-4. "Create new secret key" 클릭
-5. 생성된 키 복사
-
-### API 키 등록
-
-터미널에서 OpenClaw 설정 파일 생성:
+### 터미널에 키 등록하기
+보안을 위해 환경변수 방식으로 등록하는 것이 좋습니다. 터미널에 아래와 같이 입력해 보세요.
 
 ```bash
-mkdir -p ~/.openclaw
-nano ~/.openclaw/config.yaml
-```
-
-nano 에디터가 열리면 아래 내용 입력 (Claude 사용 시):
-
-```yaml
-ai:
-  provider: anthropic
-  api_key: sk-ant-xxxxx  # 여기에 본인 API 키 입력
-```
-
-OpenAI 사용 시:
-
-```yaml
-ai:
-  provider: openai
-  api_key: sk-xxxxx  # 여기에 본인 API 키 입력
-```
-
-저장하고 나가기: `Ctrl + X` → `Y` → `Enter`
-
-**💡 더 안전한 방법**: 환경변수 사용
-
-```bash
-echo 'export ANTHROPIC_API_KEY="sk-ant-xxxxx"' >> ~/.zshrc
+echo 'export ANTHROPIC_API_KEY="본인의_API_키"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
-이렇게 하면 config 파일에 키를 직접 안 써도 됨.
-
 ---
 
-## 🚀 5단계: OpenClaw 실행
+## 5단계: OpenClaw 시작하기
 
-터미널에서:
+모든 준비가 끝났습니다! 터미널에서 실행해 보세요.
 
 ```bash
 openclaw
 ```
 
-환영 메시지가 나오면 성공임! 이제 AI에게 뭐든 시켜볼 수 있음.
-
-### 첫 번째 테스트
-
-OpenClaw 프롬프트에서 이렇게 입력해봄:
-
-```
-현재 폴더에 있는 파일 목록 보여줘
-```
-
-파일 목록이 나오면 정상 작동하는 거임.
+환영 메시지가 나타나면 성공입니다. 이제 "오늘의 날짜 알려줘" 같은 간단한 명령부터 시작해 보실 수 있습니다.
 
 ---
 
-## 🤖 6단계: 디스코드 봇 연동 (선택사항)
+## 6단계: 디스코드 봇 연동하기 (선택 사항)
 
-OpenClaw를 디스코드 봇으로 연동하면 디스코드에서 AI에게 명령을 내릴 수 있음. 아침마다 뉴스 요약 받기 같은 자동화가 가능해짐.
+OpenClaw를 디스코드와 연결하면 채팅창에서 AI를 부를 수 있어 편리합니다.
 
-### 디스코드 봇 생성
-
-1. [Discord Developer Portal](https://discord.com/developers/applications) 접속
-2. "New Application" 클릭
-3. 이름 입력 (예: "MyOpenClaw")하고 생성
-4. 좌측 메뉴에서 "Bot" 클릭
-5. "Add Bot" → "Yes, do it!" 클릭
-6. "Reset Token" 클릭해서 봇 토큰 복사 (이것도 한 번만 보여줌!)
-
-### 봇 권한 설정
-
-1. 같은 페이지에서 "Privileged Gateway Intents" 섹션 찾기
-2. "Message Content Intent" 활성화 (중요!)
-3. 저장
-
-### 봇을 서버에 초대
-
-1. 좌측 메뉴에서 "OAuth2" → "URL Generator" 클릭
-2. SCOPES에서 "bot" 체크
-3. BOT PERMISSIONS에서 필요한 권한 체크:
-   - Send Messages
-   - Read Message History
-   - Use Slash Commands
-4. 생성된 URL 복사해서 브라우저에 붙여넣기
-5. 봇을 추가할 서버 선택하고 승인
-
-### OpenClaw에 디스코드 연동
-
-config.yaml에 추가:
-
-```yaml
-integrations:
-  discord:
-    enabled: true
-    bot_token: "봇_토큰_여기에_입력"
-    prefix: "!"  # 명령어 앞에 붙일 기호
-```
-
-### 봇 실행
+1. [Discord Developer Portal](https://discord.com/developers/applications)에서 새로운 애플리케이션을 만듭니다.
+2. "Bot" 메뉴에서 봇을 생성하고 토큰을 복사합니다.
+3. "Message Content Intent" 설정을 반드시 켭니다.
+4. OpenClaw 설정 파일(`~/.openclaw/config.yaml`)에 토큰 정보를 추가합니다.
 
 ```bash
 openclaw --discord
 ```
 
-디스코드 서버에서 `!help` 입력해서 봇이 응답하면 성공임.
+명령어로 디스코드 모드를 활성화하면 됩니다.
 
 ---
 
-## 🔥 Troubleshooting: 자주 겪는 문제들
+## 자주 겪는 문제 해결(Troubleshooting)
 
-### ❌ "command not found: brew"
+### "command not found: brew" 에러가 나요
+M1 이상의 Mac에서 PATH 설정이 되지 않았을 때 발생합니다. 위 2단계의 '추가 작업' 명령어를 다시 한번 실행해 주세요.
 
-**원인**: Homebrew PATH 설정이 안 됨 (특히 M1/M2/M3 Mac)
-
-**해결**:
-```bash
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-source ~/.zprofile
-```
-
-### ❌ "command not found: openclaw"
-
-**원인**: 설치가 제대로 안 됐거나 터미널 재시작 필요
-
-**해결**:
-```bash
-# 터미널 완전히 껐다가 다시 열기
-# 그래도 안 되면 재설치
-brew reinstall openclaw
-```
-
-### ❌ "API key invalid" 또는 인증 에러
-
-**원인**: API 키가 잘못됐거나 만료됨
-
-**해결**:
-1. API 키 다시 확인 (복사할 때 앞뒤 공백 없는지)
-2. API 서비스 대시보드에서 키가 활성 상태인지 확인
-3. 결제 정보가 등록되어 있는지 확인 (무료 크레딧 소진됐을 수 있음)
-
-### ❌ "Permission denied"
-
-**원인**: 권한 문제
-
-**해결**:
-```bash
-sudo chown -R $(whoami) ~/.openclaw
-```
-
-### ❌ 디스코드 봇이 응답 안 함
-
-**원인**: 여러 가지 가능성
-
-**체크리스트**:
-1. 봇이 서버에 제대로 초대됐는지 확인
-2. "Message Content Intent" 활성화했는지 확인
-3. 봇 토큰이 정확한지 확인
-4. OpenClaw가 `--discord` 옵션으로 실행 중인지 확인
-
-### ❌ Homebrew 설치 중 에러
-
-**원인**: Xcode Command Line Tools 미설치
-
-**해결**:
-```bash
-xcode-select --install
-```
-
-팝업 나오면 "설치" 클릭하고 완료 후 Homebrew 재설치.
+### API 키가 작동하지 않아요
+키를 복사할 때 앞뒤에 공백이 포함되지 않았는지, 그리고 해당 서비스에 결제 수단이나 크레딧이 등록되어 있는지 확인해 보세요.
 
 ---
 
-## 🎉 설치 완료! 이제 뭐 함?
-
-1. **기본 사용법 익히기**: 간단한 요청부터 시작해봄 ("현재 날짜 알려줘", "이 폴더에 test.txt 파일 만들어줘")
-2. **프로젝트에 적용**: 실제 작업 폴더에서 OpenClaw 실행해보기
-3. **자동화 설정**: 자주 하는 작업을 자동화하는 방법 찾아보기
-
----
+설치를 완료하신 것을 축하드립니다! 이제 OpenClaw와 함께 더 스마트한 디지털 생활을 즐겨보세요.
